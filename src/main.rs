@@ -11,6 +11,29 @@ const EMPTY : char = ' ';
 
 type Map = [[char; MAX_Y]; MAX_X];
 
+// gérer la vie des cellules via le `lifetime ?
+// utiliser les traits pour spécialiser les cellules ?
+
+/* une case est vide => solicitation du gestionnaire de vie
+    en fonction du voisinage il va peupler la case
+    attribution d'une probabilité d'apparition d'une entité d'un type donné
+    puis tirage au hasard
+*/
+/* la case n'est pas vide =>
+    en fonction du voisinage perçus  l'entité évolue
+*/
+
+// une entité : structure (Point ?) + Trait en fonction du type d'entité
+/* gestionnaire de vie : module avec une structure définissant les types d'entités, leur condition d'apparition et un constructeur
+ leur probabilité d'apparition est géré par un Trait ? 
+*/
+// pour la doc : `cargo doc`
+
+
+fn main() {
+    jeu_de_la_vie();
+}
+
 fn print_the_map(world : &Map) {
     for x_line in world.iter() {
         print!("|");
@@ -29,6 +52,10 @@ fn if_limit_else(index: usize, limit: usize) -> usize {
     if index == limit - 1 {0} else {index + 1}
 }
 
+//fn slice_map(world, case.perception, idx_x, idx_y) {
+
+//}
+
 fn update_the_map(world : &Map) -> Map {
     let mut updated_map : Map = world.clone();
 
@@ -37,6 +64,7 @@ fn update_the_map(world : &Map) -> Map {
         let mut idx_y = 0;
         //print!("|");
         for case in line.iter() {
+  //          case.you_see(slice_map(world, case.perception, idx_x, idx_y));
             let mut neighborhood = 0;
             if world[if_edge_else(idx_x, MAX_X)][if_edge_else(idx_y, MAX_Y)] == FULL {
                 neighborhood += 1;
@@ -66,6 +94,7 @@ fn update_the_map(world : &Map) -> Map {
                 updated_map[idx_x][idx_y] = EMPTY;
             } else if neighborhood > 3 {
                 updated_map[idx_x][idx_y] = EMPTY;
+            } else /*if neighborhood == 3*/  {
                 updated_map[idx_x][idx_y] = FULL;
             }
             //print!("{}", neighborhood);
@@ -96,11 +125,4 @@ fn jeu_de_la_vie() {
         println!("iteration numméro : {}", iteration_count);
     }
     println!("Bye world!");
-}
-// gérer la vie des cellules via le `lifetime
-// utiliser les traits pour spécialiser les cellules ?
-
-// pour la doc : `cargo doc`
-fn main() {
-    jeu_de_la_vie();
 }
