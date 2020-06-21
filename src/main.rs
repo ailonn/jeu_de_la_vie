@@ -1,4 +1,4 @@
-const MAX_ITERATION: u32 = 1000;
+const MAX_ITERATION: u32 = 10;
 
 const MAX_X:usize = 25;
 const MAX_Y:usize = 100;
@@ -66,7 +66,6 @@ fn update_the_map(world : &Map) -> Map {
                 updated_map[idx_x][idx_y] = EMPTY;
             } else if neighborhood > 3 {
                 updated_map[idx_x][idx_y] = EMPTY;
-            } else if neighborhood == 3 {
                 updated_map[idx_x][idx_y] = FULL;
             }
             //print!("{}", neighborhood);
