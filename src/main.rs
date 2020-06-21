@@ -29,7 +29,7 @@ fn if_limit_else(index: usize, limit: usize) -> usize {
     if index == limit - 1 {0} else {index + 1}
 }
 
-fn update_the_map(world : &Map) -> [[char; MAX_Y]; MAX_X]{
+fn update_the_map(world : &Map) -> Map {
     let mut updated_map : Map = world.clone();
 
     let mut idx_x = 0;
