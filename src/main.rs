@@ -1,7 +1,7 @@
-const MAX_ITERATION: u32 = 120;
+const MAX_ITERATION: u32 = 1000;
 
-const MAX_X:usize = 250;
-const MAX_Y:usize = 230;
+const MAX_X:usize = 25;
+const MAX_Y:usize = 100;
 
 const MID_X_INDEX : usize = (MAX_X - 1)/2;
 const MID_Y_INDEX : usize = (MAX_Y - 1)/2;
@@ -66,7 +66,7 @@ fn update_the_map(world : &Map) -> Map {
                 updated_map[idx_x][idx_y] = EMPTY;
             } else if neighborhood > 3 {
                 updated_map[idx_x][idx_y] = EMPTY;
-            } else {
+            } else if neighborhood == 3 {
                 updated_map[idx_x][idx_y] = FULL;
             }
             //print!("{}", neighborhood);
@@ -84,9 +84,11 @@ fn jeu_de_la_vie() {
 
     let mut iteration_count: u32 = 0;
 
-    world[MID_X_INDEX][MID_Y_INDEX] = FULL;
     world[MID_X_INDEX][MID_Y_INDEX + 1] = FULL;
-    world[MID_X_INDEX + 1][MID_Y_INDEX] = FULL;
+    world[MID_X_INDEX+1][MID_Y_INDEX + 1] = FULL;
+    world[MID_X_INDEX+1][MID_Y_INDEX] = FULL;
+    world[MID_X_INDEX+1][MID_Y_INDEX - 1] = FULL;
+    world[MID_X_INDEX-1][MID_Y_INDEX - 1] = FULL;
 
     while iteration_count < MAX_ITERATION {
         iteration_count += 1;
